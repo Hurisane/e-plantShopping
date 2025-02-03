@@ -6,6 +6,8 @@ import './CartItem.css';
 const CartItem = ({ onContinueShopping }) => {
   const cart = useSelector(state => state.cart.items);
 
+  const totalItemsInCart = cart.reduce((total,item) => total + item.quantity,0);
+
   const dispatch = useDispatch();
 
   // Calculate total amount for all products in the cart
@@ -77,7 +79,7 @@ const CartItem = ({ onContinueShopping }) => {
           </div>
         ))}
       </div>
-      <div style={{ marginTop: '20px', color: 'black' }} className='total_cart_amount'></div>
+      <div style={{ marginTop: '20px', color: 'black' }} className='total_cart_amount'>{totalItemsInCart > 0 ? `Items in cart: ${totalItemsInCart}` : ''}</div>
       <div className="continue_shopping_btn">
         <button className="get-started-button" onClick={(e) => handleContinueShopping(e)}>Continue Shopping</button>
         <br />
